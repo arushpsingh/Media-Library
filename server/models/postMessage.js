@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 const postSchema = mongoose.Schema({
   title: String,
@@ -7,14 +7,14 @@ const postSchema = mongoose.Schema({
   tags: [String],
   selectedFile: String,
 
-  likeCount:{
+  likeCount: {
     type: Number,
-    default: 0
+    default: 0,
   },
 
-  createdAt:{
+  createdAt: {
     type: Date,
-    default: new Date()
+    default: new Date(),
   },
 });
 
