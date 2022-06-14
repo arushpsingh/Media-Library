@@ -2,6 +2,7 @@
   "name": "server",
   "version": "1.0.0",
   "type": "module",
+  "proxy": "http://localhost:5000/posts",
   "scripts": {
     "dev": "NODE_ENV=development nodemon server.js",
     "prod": "NODE_ENV=production nodemon server.js"

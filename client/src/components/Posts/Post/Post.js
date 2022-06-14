@@ -10,8 +10,8 @@ import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import DeleteIcon from "@mui/icons-material/Delete";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import moment from "moment";
-import { useDispatch } from "react-redux";
 import { deletePost } from "../../../actions/posts";
+import { useDispatch } from "react-redux";
 
 const Post = ({ post, setCurrentId }) => {
   const classes = useStyles();

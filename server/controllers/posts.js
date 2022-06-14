@@ -43,6 +43,7 @@ export const updatePost = async (req, res) => {
 };
 
 export const deletePost = async (req, res) => {
+  console.log(req.params);
   const { id } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(id))
