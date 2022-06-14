@@ -1,14 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import useStyles from "./styles";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 import FileBase64 from "react-file-base64";
-import { useDispatch } from "react-redux";
-import { createPost } from "../../actions/posts";
+import { useDispatch, useSelector } from "react-redux";
+import { createPost, updatePost } from "../../actions/posts";
 
-const Form = () => {
+const Form = ({ currentId, setCurrentId }) => {
   const [postData, setPostData] = useState({
     creator: "",
     title: "",
@@ -21,10 +21,24 @@ const Form = () => {
 
   const dispatch = useDispatch();
 
+  const post = useSelector((state) =>
+    currentId ? state.posts.find((p) => p._id === currentId) : null
+  );
+
+  console.log("post", postData);
+
+  useEffect(() => {
+    if (post) setPostData(post);
+  }, [post]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    dispatch(createPost(postData));
+    if (currentId) {
+      dispatch(updatePost(currentId, postData));
+    } else {
+      dispatch(createPost(postData));
+    }
   };
 
   const clear = () => {};
@@ -41,7 +55,8 @@ const Form = () => {
           name="creator"
           variant="outlined"
           label="Creator"
-          fullWidthvalue={postData.creator}
+          fullWidth
+          value={postData.creator}
           onChange={(e) =>
             setPostData({ ...postData, creator: e.target.value })
           }
@@ -51,7 +66,8 @@ const Form = () => {
           name="title"
           variant="outlined"
           label="Title"
-          fullWidthvalue={postData.title}
+          fullWidth
+          value={postData.title}
           onChange={(e) => setPostData({ ...postData, title: e.target.value })}
         />
 
@@ -59,7 +75,8 @@ const Form = () => {
           name="message"
           variant="outlined"
           label="Message"
-          fullWidthvalue={postData.message}
+          fullWidth
+          value={postData.message}
           onChange={(e) =>
             setPostData({ ...postData, message: e.target.value })
           }
@@ -69,7 +86,8 @@ const Form = () => {
           name="tags"
           variant="outlined"
           label="Tags"
-          fullWidthvalue={postData.tags}
+          fullWidth
+          value={postData.tags}
           onChange={(e) => setPostData({ ...postData, tags: e.target.value })}
         />
 
